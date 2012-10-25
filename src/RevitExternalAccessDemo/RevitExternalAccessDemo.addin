@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>  
+  <AddIn Type="Application">
+    <Name>Application RevitExternalAccessDemo</Name>
+    <Assembly>RevitExternalAccessDemo.dll</Assembly>
+    <FullClassName>RevitExternalAccessDemo.App</FullClassName>
+    <ClientId>a4d65ea8-1439-4621-872e-6d6b70887361</ClientId>
+    <VendorId>TBC_</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

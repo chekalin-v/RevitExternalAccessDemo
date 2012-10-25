@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitExternalAccessDemo", "RevitExternalAccessDemo\RevitExternalAccessDemo.csproj", "{16B96CA3-1021-4726-BF42-B81D2A332321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitExternalAccessClient", "RevitExternalAccessClient\RevitExternalAccessClient.csproj", "{0070CD73-DED2-44D4-841C-4B586D2C1783}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16B96CA3-1021-4726-BF42-B81D2A332321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B96CA3-1021-4726-BF42-B81D2A332321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16B96CA3-1021-4726-BF42-B81D2A332321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16B96CA3-1021-4726-BF42-B81D2A332321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0070CD73-DED2-44D4-841C-4B586D2C1783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0070CD73-DED2-44D4-841C-4B586D2C1783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0070CD73-DED2-44D4-841C-4B586D2C1783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0070CD73-DED2-44D4-841C-4B586D2C1783}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
