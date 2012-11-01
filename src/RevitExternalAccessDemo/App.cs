@@ -55,10 +55,13 @@ namespace RevitExternalAccessDemo
 
                 serviceHost.Open();
             }
-            catch (Exception)
-            {
+            catch (Exception ex)
+            {                
+                a.ControlledApplication
+                    .WriteJournalComment("Could not start WCF service.\r\n" 
+                        + ex.ToString(),
+                    true);
                 
-                throw;
             }
             
             return Result.Succeeded;
@@ -87,8 +90,11 @@ namespace RevitExternalAccessDemo
             }
             catch (Exception ex)
             {
-                uiApp.Application.WriteJournalComment("FamilyBrowserCommand. An error occurs while execute command OnIdling event\r\n" +
-                    ex.ToString(), true);
+                uiApp.Application.WriteJournalComment(
+                    "RevitExternalService. An error occured "
+                    + "while executing the OnIdling event:\r\n"
+                    + ex.ToString(), true);
+
                 Debug.WriteLine(ex);
             }
 

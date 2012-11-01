@@ -61,8 +61,7 @@ namespace RevitExternalAccessClient
                             Console.WriteLine(path);
                             break;
 
-                        case ConsoleKey.W:
-                            
+                        case ConsoleKey.W:                                                       
 
                             // H
                             CreateWallAndWriteResult(XYZ.Create(-60, 50),

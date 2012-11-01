@@ -27,12 +27,16 @@ namespace RevitExternalAccessDemo
         private const int WAIT_TIMEOUT = 10000; // 10 seconds timeout
 
         #region Implementation of IRevitExternalService
+
         public string GetCurrentDocumentPath()
         {
             Debug.Print("Push task to the container: {0}", DateTime.Now.ToString("HH:mm:ss.fff"));
+
             lock (_locker)
             {
                 TaskContainer.Instance.EnqueueTask(GetDocumentPath);
+
+                // Wait when the task is completed
                 Monitor.Wait(_locker, WAIT_TIMEOUT);
             }
 
@@ -46,6 +50,8 @@ namespace RevitExternalAccessDemo
             {
                 currentDocumentPath = uiapp.ActiveUIDocument.Document.PathName;
             }
+            // Always release locker in finally block
+            // to ensure to unlock locker object.
             finally
             {
                 lock (_locker)
