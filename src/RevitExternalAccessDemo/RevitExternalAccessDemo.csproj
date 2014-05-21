@@ -56,12 +56,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RevitAPI">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\Revit Structure 2013\Program\RevitAPI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit MEP 2014\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIUI, Version=2013.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\Revit Structure 2013\Program\RevitAPIUI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit MEP 2014\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -76,6 +76,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Properties\Resources.ru.Designer.cs">
+      <DependentUpon>Resources.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RevitExternalService.cs" />
     <Compile Include="TaskContainer.cs" />
     <Compile Include="XYZ.cs" />
@@ -107,14 +117,24 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterClean">
     <Delete Files="$(AppData)\Autodesk\REVIT\Addins\2013\RevitExternalAccessDemo.addin" />
     <Delete Files="$(AppData)\Autodesk\REVIT\Addins\2013\RevitExternalAccessDemo.dll" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)RevitExternalAccessDemo.addin" "$(AppData)\Autodesk\REVIT\Addins\2013"
-copy "$(TargetPath)" "$(AppData)\Autodesk\REVIT\Addins\2013"
+    <PostBuildEvent>copy "$(ProjectDir)RevitExternalAccessDemo.addin" "$(AppData)\Autodesk\REVIT\Addins\2014"
+copy "$(TargetPath)" "$(AppData)\Autodesk\REVIT\Addins\2014"
 
 copy "$(ProjectDir)RevitExternalAccessDemo.addin" "$(AppData)\Autodesk\REVIT\Addins\2012"
 copy "$(TargetPath)" "$(AppData)\Autodesk\REVIT\Addins\2012"</PostBuildEvent>

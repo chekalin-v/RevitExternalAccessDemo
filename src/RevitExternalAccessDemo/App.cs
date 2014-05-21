@@ -1,5 +1,5 @@
 /* 
- * Copyright 2012 © Victor Chekalin IVC
+ * Copyright 2014 © Victor Chekalin
  * 
  * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
  * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -19,6 +19,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Events;
+using RevitExternalAccessDemo.Properties;
 
 #endregion
 
@@ -27,7 +28,7 @@ namespace RevitExternalAccessDemo
     class App : IExternalApplication
     {
         private const string serviceUrl =
-            "http://localhost:56789/RevitExternalService";
+            "net.pipe://localhost/";
 
 
         private ServiceHost serviceHost;
@@ -45,21 +46,22 @@ namespace RevitExternalAccessDemo
             try
             {
                 serviceHost.AddServiceEndpoint(typeof (IRevitExternalService),
-                                               new WSHttpBinding(),
+                                               new NetNamedPipeBinding(), 
                                                "RevitExternalService");
 
-                ServiceMetadataBehavior smb =
-                    new ServiceMetadataBehavior();
-                smb.HttpGetEnabled = true;
-                serviceHost.Description.Behaviors.Add(smb);
+                //ServiceMetadataBehavior smb =
+                //    new ServiceMetadataBehavior();
+                //smb.HttpGetEnabled = true;
+                //serviceHost.Description.Behaviors.Add(smb);
 
                 serviceHost.Open();
             }
             catch (Exception ex)
             {                
                 a.ControlledApplication
-                    .WriteJournalComment("Could not start WCF service.\r\n" 
-                        + ex.ToString(),
+                    .WriteJournalComment(string.Format("{0}.\r\n{1}",  
+                        Resources.CouldNotStartWCFService,
+                        ex.ToString()),
                     true);
                 
             }
@@ -81,19 +83,19 @@ namespace RevitExternalAccessDemo
 
             try
             {
-                Debug.Print("Start execute task: {0}", DateTime.Now.ToString("HH:mm:ss.fff"));
+                Debug.Print("{0}: {1}", Resources.StartExecuteTask, DateTime.Now.ToString("HH:mm:ss.fff"));
 
                 var task = TaskContainer.Instance.DequeueTask();
                 task(uiApp);
 
-                Debug.Print("Ending execute task: {0}", DateTime.Now.ToString("HH:mm:ss.fff"));
+                Debug.Print("{0}: {1}", Resources.EndExecuteTask, DateTime.Now.ToString("HH:mm:ss.fff"));
             }
             catch (Exception ex)
             {
                 uiApp.Application.WriteJournalComment(
-                    "RevitExternalService. An error occured "
-                    + "while executing the OnIdling event:\r\n"
-                    + ex.ToString(), true);
+                    string.Format("RevitExternalService. {0}:\r\n{2}",
+                    Resources.AnErrorOccuredWhileExecutingTheOnIdlingEvent,
+                    ex.ToString()), true);
 
                 Debug.WriteLine(ex);
             }

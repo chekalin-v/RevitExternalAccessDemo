@@ -1,5 +1,5 @@
 /* 
- * Copyright 2012 © Victor Chekalin IVC
+ * Copyright 2014 © Victor Chekalin
  * 
  * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
  * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RevitExternalAccessDemo.Properties;
 
 namespace RevitExternalAccessDemo
 {
@@ -30,7 +31,7 @@ namespace RevitExternalAccessDemo
 
         public string GetCurrentDocumentPath()
         {
-            Debug.Print("Push task to the container: {0}", DateTime.Now.ToString("HH:mm:ss.fff"));
+            Debug.Print("{0}: {1}", Resources.PushTaskToTheContainer, DateTime.Now.ToString("HH:mm:ss.fff"));
 
             lock (_locker)
             {
@@ -40,7 +41,7 @@ namespace RevitExternalAccessDemo
                 Monitor.Wait(_locker, WAIT_TIMEOUT);
             }
 
-            Debug.Print("Finish task: {0}", DateTime.Now.ToString("HH:mm:ss.fff"));
+            Debug.Print("{0}: {1}", Resources.FinishTask, DateTime.Now.ToString("HH:mm:ss.fff"));
             return currentDocumentPath;
         }
 
@@ -75,7 +76,7 @@ namespace RevitExternalAccessDemo
                         {
                             var doc = uiapp.ActiveUIDocument.Document;
 
-                            using (Transaction t = new Transaction(doc, "Create wall"))
+                            using (Transaction t = new Transaction(doc, Resources.CreateWall))
                             {
                                 t.Start();
 

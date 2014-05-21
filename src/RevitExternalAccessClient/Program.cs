@@ -1,5 +1,5 @@
 ﻿/* 
- * Copyright 2012 © Victor Chekalin IVC
+ * Copyright 2014 © Victor Chekalin
  * 
  * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
  * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -10,6 +10,7 @@
 
 using System;
 using System.ServiceModel;
+using RevitExternalAccessClient.Properties;
 using RevitExternalAccessDemo;
 
 namespace RevitExternalAccessClient
@@ -22,14 +23,14 @@ namespace RevitExternalAccessClient
 
             ConsoleKey command;
 
-            Console.WriteLine("Press any key when Revit has launched..");
+            Console.WriteLine(Resources.PressAnyKeyWhenRevitHasStarted);
             Console.ReadKey();
 
             IRevitExternalService service;
             try
             {
                 System.ServiceModel.ChannelFactory<IRevitExternalService> channelFactory =
-                new ChannelFactory<IRevitExternalService>("WSHttpBinding_IRevitExternalService");
+                new ChannelFactory<IRevitExternalService>("IRevitExternalService");
 
                 service = channelFactory.CreateChannel();
             }
@@ -42,10 +43,10 @@ namespace RevitExternalAccessClient
 
             while (true)
             {
-                Console.WriteLine("Select command:");
-                Console.WriteLine("\tP - Get project file path");
-                Console.WriteLine("\tW - Create walls");
-                Console.WriteLine("\tEsc - Exit");
+                Console.WriteLine(Resources.SelectCommand);
+                Console.WriteLine("\tP - {0}", Resources.GetProjectFilePath);
+                Console.WriteLine("\tW - {0}", Resources.CreateWalls);
+                Console.WriteLine("\tEsc - {0}", Resources.Exit);
                 var key = Console.ReadKey();
                 Console.WriteLine();
 
@@ -206,14 +207,14 @@ namespace RevitExternalAccessClient
                                 XYZ.Create(-3, 18),
                                 service);
 
-                            Console.WriteLine("Walls created...");
+                            Console.WriteLine(Resources.WallsCreated);
                             break;
 
                         case ConsoleKey.Escape:                            
                             return;
 
                         default:
-                            Console.WriteLine("!!!Wrong command!!!");
+                            Console.WriteLine(Resources.WrongCommand);
                             continue;
                     }
 
@@ -233,7 +234,7 @@ namespace RevitExternalAccessClient
         private static void CreateWallAndWriteResult(XYZ point1, XYZ point2, IRevitExternalService service)
         {
             bool res = service.CreateWall(point1, point2);
-            Console.WriteLine("Create wall result: {0}", res);
+            Console.WriteLine("{0}: {1}", Resources.CreateWallResult, res);
         }
     }
 }
